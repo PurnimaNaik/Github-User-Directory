@@ -1,0 +1,21 @@
+
+.searchBox {
+  width: 75%;
+  height: 35px;
+  margin-top: 2%;
+  border: 1px solid lightgray;
+  background-image: url("/assets/search.png");
+  padding-left: 3%;
+  padding-right: 1%;
+  font-family: Cochin;
+  font-size: 16px;
+  background-repeat: no-repeat;
+  outline-color: darkgrey;
+  outline-width: medium;
+}
+
+.searchBoxContainer {
+  display: flex;
+  justify-content: center;
+}
+$bgurl: url('/assets/search.png');
