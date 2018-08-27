@@ -3,6 +3,11 @@
   padding-bottom: 50px;
 }
 
+.mainContainer h1{
+  font-family: Cochin;
+  /* margin-top: 50px; */
+}
+
 .cardColumns{
   margin-left:5%;
   margin-right:5%;

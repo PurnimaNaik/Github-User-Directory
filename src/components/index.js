@@ -3,11 +3,12 @@ import {render} from "react-dom";
 import {HeaderComponent} from "../components/HeaderComponent.js";
 import {ListComponent} from "../components/ListComponent.js";
 import {ModalComponent} from "../components/ModalComponent.js";
+import {SearchBarComponent} from "../components/SearchBarComponent.js";
 import $ from "jquery";
 
 import style from '../styles/index.css';
 
-export class App extends React.Component{
+export class Index extends React.Component{
 
 constructor(props){
   super();
@@ -20,7 +21,8 @@ constructor(props){
   integerIDofLastUser:"",
   integerIDofPreviousLastUser:0,
   userIdCutoffList:[],
-  }
+  disclaimerText:false,
+}
   this.ontoggleModalVisibility = this.ontoggleModalVisibility.bind(this);
   this.oncallback = this.oncallback.bind(this);
   this.onIncrementcallback = this.onIncrementcallback.bind(this);
@@ -30,6 +32,7 @@ constructor(props){
   this.setLastIndex=this.setLastIndex.bind(this);
   this.setprevIndexOnNext=this.setprevIndexOnNext.bind(this);
   this.setprevIndexOnPrev=this.setprevIndexOnPrev.bind(this);
+  this.actionToCall = this.actionToCall.bind(this);
 }
 
 componentDidMount(){
@@ -45,6 +48,9 @@ componentDidMount(){
    }
   }.bind(this);
   request.send();
+
+
+
 }
 
 oncallback(count) {
@@ -149,6 +155,21 @@ setprevIndexOnPrev(){
       });
 }
 
+actionToCall(username){
+  console.log(username);
+if(username==""){
+  console.log("called");
+  window.location.reload();
+}
+else{
+  this.setState({
+     disclaimerText: true,
+    });
+}
+
+}
+
+
 render(){
 
 //populate the userList with List Component based on integer ID of Last User
@@ -160,21 +181,29 @@ if(this.state.currentPaginationCutoff!=0){
     }
 }
 
+const display=
+<div>
+<div className="cardColumns">
+{userList}
+</div>
+
+<div className="buttonContainerInIndex">
+{this.state.previousPaginationCutoff==0? "": <a  onClick={this.decrementPaginationIndex.bind(this)} className="paginationButtonPrev">&#8249;</a>}
+{this.state.recordsReturned==0? "": <a  onClick={this.incrementPaginationIndex.bind(this)} className="paginationButtonNext">&#8250;</a>}
+</div>
+
+<ModalComponent userClicked={this.state.userCardIndex} modalVisibility={this.state.modalVisibility} toggleVisibilityInIndex={this.ontoggleModalVisibility.bind(this)}/>
+</div>
+
 return (
 
 <div id="mainContainer" className="mainContainer">
   <HeaderComponent/>
 
-  <div className="cardColumns">
-  {userList}
-  </div>
+<SearchBarComponent actionToCall={this.actionToCall}/>
 
-  <div className="buttonContainerInIndex">
-  {this.state.previousPaginationCutoff==0? "": <a  onClick={this.decrementPaginationIndex.bind(this)} className="paginationButtonPrev">&#8249;</a>}
-  {this.state.recordsReturned==0? "": <a  onClick={this.incrementPaginationIndex.bind(this)} className="paginationButtonNext">&#8250;</a>}
-  </div>
 
-  <ModalComponent userClicked={this.state.userCardIndex} modalVisibility={this.state.modalVisibility} toggleVisibilityInIndex={this.ontoggleModalVisibility.bind(this)}/>
+{this.state.disclaimerText==true? <h1>No such user found</h1>: <div> {display} </div>}
 
 </div>
 
@@ -182,4 +211,4 @@ return (
   }
 }
 
-render(<App/>, window.document.getElementById("app"));
+// render(<App/>, window.document.getElementById("app"));
