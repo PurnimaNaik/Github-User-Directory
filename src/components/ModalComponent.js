@@ -1,6 +1,7 @@
 import React from "react";
 import {render} from "react-dom";
 import style from '../styles/modalComponent.css';
+import editIcon from '../assets/editIcon.png'
 
 export class ModalComponent extends React.Component{
 
@@ -170,7 +171,7 @@ if(this.state.repoData){
 }
 
 let codeBackground = '../assets/codeBackground.jpg';
-
+// console.log(Icon);
 const modal=
 <div onClick={this.hideModal} className="darkContainer">
 <div onClick={this.stopPropagation} className="modalContainer">
@@ -203,6 +204,19 @@ const modal=
 
 </div>
 
+<div className="bioContainer">
+
+<div className="bioContainer_content">
+{(user["bio"]!=null) && (user["bio"]!="") ? <p>Bio:{' '} {user["bio"]}</p>: ""}
+</div>
+
+<div className="bioContainer_edit">
+{(user["bio"]!=null) && (user["bio"]!="") ? <p><a href=""> Edit Bio <img  className="editIcon" alt="edit bio" src={editIcon}/></a></p>: <a href=""> Add Bio <img  className="editIcon" alt="edit bio" src={editIcon}/></a>}
+
+</div>
+
+</div>
+
 <h3>Repositories</h3>
 <div key={i} className="repoList">
 {repoList}
@@ -221,8 +235,12 @@ const modal=
 
  const renderModal = this.state.modalVisibilityinState ? <div>{modal}</div> : "";
 
+
   return (
   <div>{renderModal}</div>
     );
   }
 }
+
+
+// <editIcon width={50} height={50}/>
