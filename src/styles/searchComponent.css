@@ -12,10 +12,28 @@
   background-repeat: no-repeat;
   outline-color: darkgrey;
   outline-width: medium;
+  background-color:white;
 }
 
 .searchBoxContainer {
   display: flex;
   justify-content: center;
+  padding-bottom: 15px;
+}
+
+.searchBoxDisabled{
+  width: 75%;
+  height: 35px;
+  margin-top: 2%;
+  border: 1px solid lightgray;
+  background-image: url("/assets/search.png");
+  padding-left: 3%;
+  padding-right: 1%;
+  font-family: Cochin;
+  font-size: 16px;
+  background-repeat: no-repeat;
+  outline-color: darkgrey;
+  outline-width: medium;
+  background-color:#F6F6F6;
 }
 $bgurl: url('/assets/search.png');

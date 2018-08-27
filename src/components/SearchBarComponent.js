@@ -1,16 +1,19 @@
 import React from "react";
 import {render} from "react-dom";
+import {SearchDisplayComponent} from "../components/SearchDisplayComponent.js";
 import $ from "jquery";
 
 import style from '../styles/searchComponent.css';
+
 
 export class SearchBarComponent extends React.Component{
 
   constructor(props){
     super();
-
     this.state={
       username:"",
+      data:"",
+      noResultsflag:false,
       }
 
 this.oncallback = this.oncallback.bind(this);
@@ -44,28 +47,32 @@ if(e.which == 13) {
   request.send();
  }
 
-
-
 }.bind(this));
 
 }
 
 onNoResultCallback(){
-  console.log(this.state.username)
+  this.setState({
+    noResultsflag:true,
+    });
 this.props.actionToCall(this.state.username);
 }
 
-oncallback(data){
-  console.log("New Incoming!!!!!!!!!!!!!!!");
-  console.log(data);
+oncallback(newData){
+  this.setState({
+    data:newData,
+    });
 }
 
   render(){
 
-
     return (
+      <div>
       <div className="searchBoxContainer">
-      <input type="search"  id="searchUser" placeholder="Enter exact username..." className="searchBox" />
+      {this.state.noResultsflag==true?<input type="search" id="searchUser" placeholder="Enter exact username..." className="searchBoxDisabled" disabled/>:<input type="search"  id="searchUser" placeholder="Enter exact username..." className="searchBox" />}
+      </div>
+
+      <SearchDisplayComponent data={this.state.data}/>
       </div>
     );
   }

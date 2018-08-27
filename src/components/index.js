@@ -156,11 +156,15 @@ setprevIndexOnPrev(){
 }
 
 actionToCall(username){
-  console.log(username);
+  setTimeout(location.reload.bind(location), 2000);
+
 if(username==""){
   console.log("called");
-  window.location.reload();
+  this.setState({
+     disclaimerText: false,
+    });
 }
+
 else{
   this.setState({
      disclaimerText: true,
@@ -203,8 +207,10 @@ return (
 <SearchBarComponent actionToCall={this.actionToCall}/>
 
 
-{this.state.disclaimerText==true? <h1>No such user found</h1>: <div> {display} </div>}
+{this.state.disclaimerText==true ? <h1>No such user found</h1>:""}
 
+
+ <div> {display} </div>
 </div>
 
     );

@@ -11,6 +11,7 @@ var config={
     filename: "bundle.js",
     publicPath: "/app/"
   },
+
   module:{
   rules: [
     {
@@ -39,6 +40,7 @@ var config={
   }
   ]
   }
+
 };
 
 module.exports=config;

@@ -1,0 +1,64 @@
+.searchDisplayContainer {
+  background-color: pink;
+  padding: 20px;
+  display:flex;
+  flex-direction: column;
+  background-color: white;
+  margin-left: 19.8%;
+  margin-right: 19.8%;
+  box-shadow: 1px 1px 10px Black;
+  font-family: Cochin;
+  font-size: 18px;
+}
+
+.modalAvataarContainer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: -100px;
+}
+
+.modalAvataar {
+  height: 25%;
+  width: 25%;
+  border-radius: 250px;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-left: 8%;
+  margin-right: 8%;
+}
+
+.infoContainer p {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+.bioContainer{
+  display: flex;
+  align-items:center;
+  text-decoration: none;
+}
+.bioContainer a{
+  text-decoration: none;
+  color:#154360;
+  font-size: 15px;
+}
+.editIcon{
+  height:22px;
+  width: 22px;
+}
+.bioContainer_content{
+  display: flex;
+  flex-grow: 20;
+  justify-content: center;
+}
+.bioContainer_edit{
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  padding-bottom: 5px;
+}
