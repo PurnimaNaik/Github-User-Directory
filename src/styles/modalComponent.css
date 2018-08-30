@@ -131,26 +131,31 @@ h3 {
   padding-top: 0;
   padding-bottom: 50px;
 }
-.bioContainer{
+
+.bioContainer {
   display: flex;
-  align-items:center;
+  align-items: center;
   text-decoration: none;
 }
-.bioContainer a{
+
+.bioContainer a {
   text-decoration: none;
-  color:#154360;
+  color: #154360;
   font-size: 15px;
 }
-.editIcon{
-  height:22px;
+
+.editIcon {
+  height: 22px;
   width: 22px;
 }
-.bioContainer_content{
+
+.bioContainer_content {
   display: flex;
   flex-grow: 20;
   justify-content: center;
 }
-.bioContainer_edit{
+
+.bioContainer_edit {
   display: flex;
   flex-grow: 1;
   justify-content: center;

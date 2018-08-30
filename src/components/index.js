@@ -5,7 +5,6 @@ import {ListComponent} from "../components/ListComponent.js";
 import {ModalComponent} from "../components/ModalComponent.js";
 import {SearchBarComponent} from "../components/SearchBarComponent.js";
 import $ from "jquery";
-
 import style from '../styles/index.css';
 
 export class Index extends React.Component{
@@ -48,9 +47,6 @@ componentDidMount(){
    }
   }.bind(this);
   request.send();
-
-
-
 }
 
 oncallback(count) {
@@ -93,7 +89,6 @@ request.send();
 
 //animating smooth scroll to top of the window
  $('html, body').animate({scrollTop: 0}, 1200);
-
 }
 
 onIncrementcallback(count) {
@@ -150,71 +145,62 @@ var prevIndex=this.state.userIdCutoffList[len];
 setprevIndexOnPrev(){
   var len=this.state.userIdCutoffList.length -2;
   var prevIndex=this.state.userIdCutoffList[len];
-    this.setState({
-      integerIDofPreviousLastUser: prevIndex,
-      });
-}
+  this.setState({
+    integerIDofPreviousLastUser: prevIndex,
+    });
+  }
 
-actionToCall(username){
-  setTimeout(location.reload.bind(location), 2000);
+ actionToCall(username){
+ setTimeout(location.reload.bind(location), 2000);
 
 if(username==""){
-  console.log("called");
   this.setState({
      disclaimerText: false,
-    });
+  });
 }
 
 else{
   this.setState({
-     disclaimerText: true,
-    });
-}
-
+    disclaimerText: true,
+  });
+ }
 }
 
 
 render(){
-
 //populate the userList with List Component based on integer ID of Last User
 var userList=[];
 if(this.state.currentPaginationCutoff!=0){
-    for(var i=this.state.previousPaginationCutoff;i<=(this.state.currentPaginationCutoff)-3;i += 3){
-      const constlistComponent=<ListComponent lastUserId={this.state.integerIDofLastUser} setLastIndex={this.setLastIndex.bind(this)} endIndex={this.state.currentPaginationCutoff}  index={i} key={i} previousPaginationCutoff={this.state.previousPaginationCutoff} toggleVisibility={this.ontoggleModalVisibility.bind(this)}/>
-      userList.push(constlistComponent);
-    }
-}
-
-const display=
-<div>
-<div className="cardColumns">
-{userList}
-</div>
-
-<div className="buttonContainerInIndex">
-{this.state.previousPaginationCutoff==0? "": <a  onClick={this.decrementPaginationIndex.bind(this)} className="paginationButtonPrev">&#8249;</a>}
-{this.state.recordsReturned==0? "": <a  onClick={this.incrementPaginationIndex.bind(this)} className="paginationButtonNext">&#8250;</a>}
-</div>
-
-<ModalComponent userClicked={this.state.userCardIndex} modalVisibility={this.state.modalVisibility} toggleVisibilityInIndex={this.ontoggleModalVisibility.bind(this)}/>
-</div>
-
-return (
-
-<div id="mainContainer" className="mainContainer">
-  <HeaderComponent/>
-
-<SearchBarComponent actionToCall={this.actionToCall}/>
-
-
-{this.state.disclaimerText==true ? <h1>No such user found</h1>:""}
-
-
- <div> {display} </div>
-</div>
-
-    );
+  for(var i=this.state.previousPaginationCutoff;i<=(this.state.currentPaginationCutoff)-3;i += 3){
+    const constlistComponent=<ListComponent lastUserId={this.state.integerIDofLastUser} setLastIndex={this.setLastIndex.bind(this)} endIndex={this.state.currentPaginationCutoff}  index={i} key={i} previousPaginationCutoff={this.state.previousPaginationCutoff} toggleVisibility={this.ontoggleModalVisibility.bind(this)}/>
+    userList.push(constlistComponent);
   }
 }
 
-// render(<App/>, window.document.getElementById("app"));
+const display=
+  <div>
+  <div className="cardColumns">
+    {userList}
+  </div>
+
+  <div className="buttonContainerInIndex">
+    {this.state.previousPaginationCutoff==0? "": <a  onClick={this.decrementPaginationIndex.bind(this)} className="paginationButtonPrev">&#8249;</a>}
+    {this.state.recordsReturned==0? "": <a  onClick={this.incrementPaginationIndex.bind(this)} className="paginationButtonNext">&#8250;</a>}
+  </div>
+
+  <ModalComponent userClicked={this.state.userCardIndex} modalVisibility={this.state.modalVisibility} toggleVisibilityInIndex={this.ontoggleModalVisibility.bind(this)}/>
+  </div>
+
+
+return (
+ <div id="mainContainer" className="mainContainer">
+
+   <HeaderComponent/>
+   <SearchBarComponent actionToCall={this.actionToCall}/>
+   {this.state.disclaimerText==true ? <h1>No such user found</h1>:""}
+   <div> {display} </div>
+
+ </div>
+  );
+ }
+}

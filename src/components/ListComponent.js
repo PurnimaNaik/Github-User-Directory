@@ -2,8 +2,8 @@ import React from "react";
 import style from '../styles/listComponent.css';
 export class ListComponent extends React.Component{
 
-  constructor(props){
-    super();
+constructor(props){
+  super();
     this.state={
       allStateData:"",
       data:[],
@@ -51,24 +51,24 @@ return (
   <div className="container">
 
     <div className="userCards"  onClick={() => this.props.toggleVisibility(firstCardData["login"])} >
-    <div className="avataarContainer">
-    <img className="avataar" src={firstCardData["avatar_url"]} alt="avataar"/>
-    </div>
-    <p className="username">{firstCardData["login"]}</p>
+      <div className="avataarContainer">
+        <img className="avataar" src={firstCardData["avatar_url"]} alt="avataar"/>
+      </div>
+      <p className="username">{firstCardData["login"]}</p>
     </div>
 
     <div className="userCards" onClick={() => this.props.toggleVisibility(secondCardData["login"])} >
-    <div className="avataarContainer">
-    <img className="avataar" src={secondCardData["avatar_url"]} alt="avataar"/>
-    </div>
-    <p className="username">{secondCardData["login"]}</p>
+      <div className="avataarContainer">
+        <img className="avataar" src={secondCardData["avatar_url"]} alt="avataar"/>
+      </div>
+      <p className="username">{secondCardData["login"]}</p>
     </div>
 
     <div className="userCards" onClick={() => this.props.toggleVisibility(thirdCardData["login"])} >
-    <div className="avataarContainer">
-    <img className="avataar" src={thirdCardData["avatar_url"]} alt="avataar"/>
-    </div>
-    <p className="username">{thirdCardData["login"]}</p>
+      <div className="avataarContainer">
+        <img className="avataar" src={thirdCardData["avatar_url"]} alt="avataar"/>
+      </div>
+      <p className="username">{thirdCardData["login"]}</p>
     </div>
 
   </div>

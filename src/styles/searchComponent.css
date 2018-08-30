@@ -1,4 +1,3 @@
-
 .searchBox {
   width: 75%;
   height: 35px;
@@ -12,7 +11,7 @@
   background-repeat: no-repeat;
   outline-color: darkgrey;
   outline-width: medium;
-  background-color:white;
+  background-color: white;
 }
 
 .searchBoxContainer {
@@ -21,7 +20,7 @@
   padding-bottom: 15px;
 }
 
-.searchBoxDisabled{
+.searchBoxDisabled {
   width: 75%;
   height: 35px;
   margin-top: 2%;
@@ -34,6 +33,7 @@
   background-repeat: no-repeat;
   outline-color: darkgrey;
   outline-width: medium;
-  background-color:#F6F6F6;
+  background-color: #F6F6F6;
 }
+
 $bgurl: url('/assets/search.png');

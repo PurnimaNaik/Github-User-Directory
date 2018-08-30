@@ -3,13 +3,9 @@ import {render} from "react-dom";
 import style from '../styles/modalComponent.css';
 import editIcon from '../assets/editIcon.png'
 
-
-
-
 export class ModalComponent extends React.Component{
-
 constructor(props){
-    super();
+  super();
     this.state={
     modalVisibilityinState : props.modalVisibility,
     currentUser:props.userClicked,
@@ -19,9 +15,10 @@ constructor(props){
     reachedEnd:false,
     length:"",
     }
-    this.hideModal = this.hideModal.bind(this);
-    this.incrementPaginationIndex = this.incrementPaginationIndex.bind(this);
-    this.decrementPaginationIndex=this.decrementPaginationIndex.bind(this)
+
+  this.hideModal = this.hideModal.bind(this);
+  this.incrementPaginationIndex = this.incrementPaginationIndex.bind(this);
+  this.decrementPaginationIndex=this.decrementPaginationIndex.bind(this)
 }
 
 componentWillReceiveProps(newProps) {
@@ -37,8 +34,8 @@ this.setState({
   length:"",
 });
 
-if(newProps.userClicked){
 
+if(newProps.userClicked){
 //request to get current user's primary details
   var requestPrimaryData = new XMLHttpRequest();
   requestPrimaryData.open('GET', 'https://api.github.com/users/'+ String(newProps.userClicked), true);
@@ -74,43 +71,43 @@ if(newProps.userClicked){
       }
   }
 
-oncallback(userData) {
-  if(userData){
-  this.setState({
-    currentUserData:userData,
-  });
+  oncallback(userData) {
+    if(userData){
+    this.setState({
+      currentUserData:userData,
+    });
+    }
   }
-}
 
 //only dismiss modal when clicked on the area outside the modal
-stopPropagation(event){
-  event.stopPropagation();
-}
+  stopPropagation(event){
+    event.stopPropagation();
+  }
 
 //dismiss modal by calling ontoggleModalVisibility in index.js
-hideModal(){
-  this.props.toggleVisibilityInIndex();
-}
+  hideModal(){
+    this.props.toggleVisibilityInIndex();
+  }
 
-onDecrementRepoCallback(repoData){
-  this.setState({
-    repoData:repoData,
-    reachedEnd:false,
-  });
-}
+  onDecrementRepoCallback(repoData){
+    this.setState({
+      repoData:repoData,
+      reachedEnd:false,
+    });
+  }
 
-onIncrementRepoCallback(repoData){
-  this.setState({
-    repoData:repoData,
-  });
-}
+  onIncrementRepoCallback(repoData){
+    this.setState({
+      repoData:repoData,
+    });
+  }
 
 //request for the next set of repos and store them in state
-incrementPaginationIndex(){
-  var newPageIndex=this.state.currentPage+1;
-  this.setState({
-    currentPage:newPageIndex,
-  });
+  incrementPaginationIndex(){
+    var newPageIndex=this.state.currentPage+1;
+    this.setState({
+      currentPage:newPageIndex,
+    });
 
   var requestRepoData = new XMLHttpRequest();
   requestRepoData.open('GET', 'https://api.github.com/users/'+ String(this.state.currentUser) + '/repos?per_page=20&page=' + String(newPageIndex), true);
@@ -174,78 +171,61 @@ if(this.state.repoData){
 }
 
 let codeBackground = '../assets/codeBackground.jpg';
-// console.log(Icon);
+
 const modal=
 <div onClick={this.hideModal} className="darkContainer">
-<div onClick={this.stopPropagation} className="modalContainer">
+  <div onClick={this.stopPropagation} className="modalContainer">
 
-<div className="backgroundImageContainer">
-<img className="backgroundImage" src={codeBackground} alt="code background Image"/>
+    <div className="backgroundImageContainer">
+      <img className="backgroundImage" src={codeBackground} alt="code background Image"/>
+    </div>
+
+    <div className="modalAvataarContainer">
+      <img className="modalAvataar" src={user["avatar_url"]} alt="avataar"/>
+    </div>
+
+    <h1>{user["name"]}</h1>
+
+    <div className="infoContainer">
+      <p>Username:{' '}{user["login"]}</p>
+      <p>Followers:{' '} {user["followers"]}</p>
+      <p>Following:{' '} {user["following"]}</p>
+      <p>Public Repos:{' '}{user["public_repos"]}</p>
+    </div>
+
+    <div className="infoContainer">
+      {(user["email"]!=null) && (user["email"]!="") ? <p>Email:{' '} {user["email"]}</p>: ""}
+      {(user["location"]!=null) && (user["location"]!="") ? <p>Location:{' '} {user["location"]}</p>: ""}
+      {(user["company"]!=null) && (user["company"]!="") ? <p>Company:{' '} {user["company"]}</p>: ""}
+      {(user["blog"]!=null) && (user["blog"]!="") ? <p>Blog:{' '}{user["blog"]}</p>: ""}
+    </div>
+
+    <div className="bioContainer">
+
+      <div className="bioContainer_content">
+        {(user["bio"]!=null) && (user["bio"]!="") ? <p>Bio:{' '} {user["bio"]}</p>: ""}
+      </div>
+
+    </div>
+
+    <h3>Repositories</h3>
+    <div key={i} className="repoList">
+      {repoList}
+    </div>
+
+    <div className="buttonContainer">
+      {this.state.currentPage>=2 && user["public_repos"]!=0 ? <a onClick={this.decrementPaginationIndex}  className="paginationButtonPrev">&#8249;</a> : ""}
+      {this.state.reachedEnd==false && user["public_repos"]!=0  ? <a onClick={this.incrementPaginationIndex}  className="paginationButtonNext">&#8250;</a> : ""}
+      {user["public_repos"]==0 ? <p className="noRepoDeclaration">No public repositories</p> : ""}
+    </div>
+
+  </div>
 </div>
 
-<div className="modalAvataarContainer">
-<img className="modalAvataar" src={user["avatar_url"]} alt="avataar"/>
-</div>
+const renderModal = this.state.modalVisibilityinState ? <div>{modal}</div> : "";
 
-<h1>{user["name"]}</h1>
-
-<div className="infoContainer">
-
-<p>Username:{' '}{user["login"]}</p>
-<p>Followers:{' '} {user["followers"]}</p>
-<p>Following:{' '} {user["following"]}</p>
-<p>Public Repos:{' '}{user["public_repos"]}</p>
-
-</div>
-
-<div className="infoContainer">
-
-{(user["email"]!=null) && (user["email"]!="") ? <p>Email:{' '} {user["email"]}</p>: ""}
-{(user["location"]!=null) && (user["location"]!="") ? <p>Location:{' '} {user["location"]}</p>: ""}
-{(user["company"]!=null) && (user["company"]!="") ? <p>Company:{' '} {user["company"]}</p>: ""}
-{(user["blog"]!=null) && (user["blog"]!="") ? <p>Blog:{' '}{user["blog"]}</p>: ""}
-
-</div>
-
-<div className="bioContainer">
-
-<div className="bioContainer_content">
-{(user["bio"]!=null) && (user["bio"]!="") ? <p>Bio:{' '} {user["bio"]}</p>: ""}
-</div>
-
-<div className="bioContainer_edit">
-{(user["bio"]!=null) && (user["bio"]!="") ? <p><a href="https://github.com/login/oauth/authorize?client_id=4f316e83b3e3f03239c3&scope=bio&redirect_uri=http://localhost:8080/signin"> Edit Bio <img  className="editIcon" alt="edit bio" src={editIcon}/></a></p>: <a href=""> Add Bio <img  className="editIcon" alt="edit bio" src={editIcon}/></a>}
-
-</div>
-
-</div>
-
-<h3>Repositories</h3>
-<div key={i} className="repoList">
-{repoList}
-</div>
-
-<div className="buttonContainer">
-
-{this.state.currentPage>=2 && user["public_repos"]!=0 ? <a onClick={this.decrementPaginationIndex}  className="paginationButtonPrev">&#8249;</a> : ""}
-{this.state.reachedEnd==false && user["public_repos"]!=0  ? <a onClick={this.incrementPaginationIndex}  className="paginationButtonNext">&#8250;</a> : ""}
-{user["public_repos"]==0 ? <p className="noRepoDeclaration">No public repositories</p> : ""}
-
-</div>
-
-</div>
-</div>
-
- const renderModal = this.state.modalVisibilityinState ? <div>{modal}</div> : "";
-
-
-  return (
-
-<div>{renderModal}</div>
-
-
-    );
+   return (
+     <div>{renderModal}</div>
+   );
   }
 }
-// <Route path="/signin/callback" component={self}/>
-//<div>{renderModal}</div>
