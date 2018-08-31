@@ -1,4 +1,4 @@
-## Github User Directory
+# Github User Directory
 
 Install dependencies:
 npm install
