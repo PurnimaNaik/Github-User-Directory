@@ -73,7 +73,7 @@ export class SearchDisplayComponent extends React.Component{
 
   render(){
 
-  var user=this.state.user;
+   var user=this.state.user;
 
     return (
       <div>

@@ -73,7 +73,7 @@ export class SearchBarComponent extends React.Component{
     return (
       <div>
         <div className="searchBoxContainer">
-          {this.state.noResultsflag==true?<input type="search" id="searchUser" placeholder="Enter exact username..." className="searchBoxDisabled" disabled/>:<input type="search"  id="searchUser" placeholder="Enter exact username..." className="searchBox" />}
+          {this.state.noResultsflag==true?<input type="search" id="searchUser" placeholder="Enter username..." className="searchBoxDisabled" disabled/>:<input type="search"  id="searchUser" placeholder="Enter username..." className="searchBox" />}
         </div>
         {this.state.data==""? "": <SearchDisplayComponent data={this.state.data}/>}
       </div>
