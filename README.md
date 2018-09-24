@@ -3,6 +3,7 @@
 ## Description
 Created a website to browse/search Github users and their repositories using Github’s REST API V3.
 
+## Instructions
 Install dependencies:
 `npm install`
 
