@@ -11,7 +11,7 @@
   "author": "Purnima Naik",
   "license": "MIT",
   "dependencies": {
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-router": "^4.3.1",
